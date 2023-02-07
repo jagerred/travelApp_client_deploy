@@ -75,11 +75,12 @@ export const postPlace = createAsyncThunk(
 export const postReorderedList = createAsyncThunk(
 	'user/postReorderedList',
 	async function (data, { dispatch, rejectWithValue, getState }) {
+		const uid = getState().user.userInfo.uid;
+		const { cityId, type, changedList } = data;
+		type === 'reorderPlaces'
+			? dispatch(updatePlacesOrder({ cityId, changedList }))
+			: dispatch(updateVisitedOrder({ cityId, changedList }));
 		try {
-			const uid = getState().user.userInfo.uid;
-
-			const { cityId, type, changedList } = data;
-
 			const response = await axios.patch(
 				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				changedList
@@ -87,10 +88,6 @@ export const postReorderedList = createAsyncThunk(
 			if (!response.status === 200) {
 				throw new Error('Server Error!');
 			}
-
-			type === 'reorderPlaces'
-				? dispatch(updatePlacesOrder({ cityId, changedList }))
-				: dispatch(updateVisitedOrder({ cityId, changedList }));
 		} catch (error) {
 			return rejectWithValue(error.message);
 		}
@@ -100,9 +97,12 @@ export const postReorderedList = createAsyncThunk(
 export const deletePlace = createAsyncThunk(
 	'user/deletePlace',
 	async function (placeData, { dispatch, rejectWithValue, getState }) {
+		const uid = getState().user.userInfo.uid;
+		const { cityId, type, place, both, placeObj } = placeData;
+		type === 'deletePlace'
+			? dispatch(setVisitedPlace({ cityId, place: placeObj }))
+			: dispatch(removeVisitedPlace({ cityId, place: placeObj }));
 		try {
-			const uid = getState().user.userInfo.uid;
-			const { cityId, type, place, both, placeObj } = placeData;
 			const response = await axios.delete(
 				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				{ data: place }
@@ -112,9 +112,6 @@ export const deletePlace = createAsyncThunk(
 				throw new Error('Server Error!');
 			}
 
-			type === 'deletePlace'
-				? dispatch(setVisitedPlace({ cityId, place: placeObj }))
-				: dispatch(removeVisitedPlace({ cityId, place: placeObj }));
 			if (both) {
 				dispatch(removePlace({ cityId, placeId: place.id }));
 				return;
