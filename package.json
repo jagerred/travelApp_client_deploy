@@ -2,7 +2,7 @@
 	"name": "travelapp",
 	"version": "0.1.0",
 	"private": true,
-	"proxy": "http://localhost:3001/",
+	"proxy": "https://travel-app-server-njn4.onrender.com/",
 	"dependencies": {
 		"@2gis/mapgl": "^1.32.1",
 		"@emotion/react": "^11.10.5",
