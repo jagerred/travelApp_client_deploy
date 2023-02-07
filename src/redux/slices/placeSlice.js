@@ -24,7 +24,7 @@ export const fetchSinglePlace = createAsyncThunk(
 	'places/fetchSinglePlace',
 	async data => {
 		const response = await axios.get(
-			`http://localhost:3001/${data.cityId}/places/${data.placeId}`
+			`https://travel-app-server-njn4.onrender.com/${data.cityId}/places/${data.placeId}`
 		);
 		return response.data;
 	}
@@ -32,7 +32,7 @@ export const fetchSinglePlace = createAsyncThunk(
 
 export const postReview = createAsyncThunk('place/postReview', async data => {
 	const response = await axios.post(
-		`http://localhost:3001/${data.cityId}/${data.placeId}/reviews`,
+		`https://travel-app-server-njn4.onrender.com/${data.cityId}/${data.placeId}/reviews`,
 		data.review
 	);
 });

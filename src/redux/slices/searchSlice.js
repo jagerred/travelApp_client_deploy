@@ -15,7 +15,9 @@ export const fetchCityInfo = createAsyncThunk(
 	'search/fetchCityInfo',
 	async (id, { rejectWithValue }) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/${id}/search`);
+			const response = await axios.get(
+				`https://travel-app-server-njn4.onrender.com/${id}/search`
+			);
 
 			return response.data;
 		} catch (error) {
@@ -26,7 +28,9 @@ export const fetchCityInfo = createAsyncThunk(
 export const searchRequest = createAsyncThunk(
 	'search/searchRequest',
 	async item => {
-		const response = await axios.get(`http://localhost:3001/${item}`);
+		const response = await axios.get(
+			`https://travel-app-server-njn4.onrender.com/${item}`
+		);
 		return response.data;
 	}
 );

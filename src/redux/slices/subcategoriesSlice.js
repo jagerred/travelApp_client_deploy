@@ -9,7 +9,7 @@ export const fetchSubcategories = createAsyncThunk(
 	'subcategories/fetchSubcategories',
 	async category => {
 		const response = await axios.get(
-			`http://localhost:3001/filters/subcategories?category=${category}`
+			`https://travel-app-server-njn4.onrender.com/filters/subcategories?category=${category}`
 		);
 		return response.data;
 	}
@@ -18,7 +18,7 @@ export const fetchAllSubcategories = createAsyncThunk(
 	'subcategories/fetchAllSubcategories',
 	async categories => {
 		const response = await axios.get(
-			`http://localhost:3001/filters/subcategoriesAll?${categories}`
+			`https://travel-app-server-njn4.onrender.com/filters/subcategoriesAll?${categories}`
 		);
 		return response.data;
 	}

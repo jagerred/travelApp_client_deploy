@@ -13,7 +13,7 @@ export const fetchPlaces = createAsyncThunk(
 	async (filters, { rejectWithValue }) => {
 		try {
 			const response = await axios.get(
-				`http://localhost:3001/${filters.id}/places?${filters.filters}`
+				`https://travel-app-server-njn4.onrender.com/${filters.id}/places?${filters.filters}`
 			);
 			return response.data;
 		} catch (error) {
@@ -27,7 +27,7 @@ export const putLike = createAsyncThunk(
 		try {
 			const { likeCount, placeId, cityId } = likeData;
 			await axios.put(
-				`http://localhost:3001/${cityId}/${placeId}/likes`,
+				`https://travel-app-server-njn4.onrender.com/${cityId}/${placeId}/likes`,
 				likeCount
 			);
 			dispatch(updateLikes({ placeId, likes: likeCount.likes }));
@@ -42,7 +42,7 @@ export const putRating = createAsyncThunk(
 		try {
 			const { cityId, placeId, ratingCount } = ratingData;
 			const response = await axios.put(
-				`http://localhost:3001/${cityId}/${placeId}/rating`,
+				`https://travel-app-server-njn4.onrender.com/${cityId}/${placeId}/rating`,
 				ratingCount
 			);
 		} catch (error) {

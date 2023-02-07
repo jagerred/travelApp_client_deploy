@@ -17,7 +17,10 @@ export const addUser = createAsyncThunk(
 	'user/addUser',
 	async function (data, { dispatch }) {
 		try {
-			const response = await axios.post('http://localhost:3001/users', data);
+			const response = await axios.post(
+				'https://travel-app-server-njn4.onrender.com/users',
+				data
+			);
 		} catch (error) {
 			dispatch(toggleServerError());
 		}
@@ -38,7 +41,7 @@ export const postCity = createAsyncThunk(
 				visited: [],
 			};
 			const response = await axios.post(
-				`http://localhost:3001/users/${uid}`,
+				`https://travel-app-server-njn4.onrender.com/users/${uid}`,
 				city
 			);
 			dispatch(addCity(city));
@@ -55,7 +58,7 @@ export const postPlace = createAsyncThunk(
 			const uid = getState().user.userInfo.uid;
 			const { cityId, type, placeObj } = data;
 			const response = await axios.post(
-				`http://localhost:3001/users/${uid}/${cityId}/${type}`,
+				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				placeObj
 			);
 			if (!response.status === 200) {
@@ -78,7 +81,7 @@ export const postReorderedList = createAsyncThunk(
 			const { cityId, type, changedList } = data;
 
 			const response = await axios.patch(
-				`http://localhost:3001/users/${uid}/${cityId}/${type}`,
+				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				changedList
 			);
 			if (!response.status === 200) {
@@ -101,7 +104,7 @@ export const deletePlace = createAsyncThunk(
 			const uid = getState().user.userInfo.uid;
 			const { cityId, type, place, both, placeObj } = placeData;
 			const response = await axios.delete(
-				`http://localhost:3001/users/${uid}/${cityId}/${type}`,
+				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				{ data: place }
 			);
 
@@ -125,7 +128,7 @@ export const uploadImage = createAsyncThunk(
 	'user/uploadImage',
 	async ({ dataForm, uid }) => {
 		const response = await axios.post(
-			`http://localhost:3001/users/uploadImage?type=${uid}`,
+			`https://travel-app-server-njn4.onrender.com/users/uploadImage?type=${uid}`,
 			dataForm,
 			{
 				headers: {
@@ -141,7 +144,9 @@ export const fetchUser = createAsyncThunk(
 	'user/fetchUser',
 	async (id, { dispatch, rejectWithValue }) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/users/${id}`);
+			const response = await axios.get(
+				`https://travel-app-server-njn4.onrender.com/users/${id}`
+			);
 			return response.data;
 		} catch (error) {
 			rejectWithValue(error);

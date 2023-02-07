@@ -20,7 +20,9 @@ export const fetchDistricts = createAsyncThunk(
 	'filter/fetchDistricts',
 	async (id, { rejectWithValue }) => {
 		try {
-			const response = await axios.get(`http://localhost:3001/${id}/districts`);
+			const response = await axios.get(
+				`https://travel-app-server-njn4.onrender.com/${id}/districts`
+			);
 			return response.data;
 		} catch (error) {
 			return rejectWithValue(error.message);

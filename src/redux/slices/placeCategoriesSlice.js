@@ -11,7 +11,7 @@ export const fetchPlaceCategories = createAsyncThunk(
 	'placeCategories/fetchPlaceCategories',
 	async () => {
 		const response = await axios.get(
-			`http://localhost:3001/filters/categories`
+			`https://travel-app-server-njn4.onrender.com/filters/categories`
 		);
 		return response.data;
 	}

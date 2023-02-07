@@ -10,7 +10,9 @@ export const fetchCities = createAsyncThunk(
 	'citiesSlice/fetchCities',
 	async (search = '', { rejectWithValue }) => {
 		try {
-			const res = await axios.get(`http://localhost:3001/${search}`);
+			const res = await axios.get(
+				`https://travel-app-server-njn4.onrender.com/${search}`
+			);
 			return res.data;
 		} catch (error) {
 			return rejectWithValue(error.message);
