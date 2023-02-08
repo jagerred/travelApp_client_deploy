@@ -97,24 +97,23 @@ export const postReorderedList = createAsyncThunk(
 export const deletePlace = createAsyncThunk(
 	'user/deletePlace',
 	async function (placeData, { dispatch, rejectWithValue, getState }) {
-		const uid = getState().user.userInfo.uid;
-		const { cityId, type, place, both, placeObj } = placeData;
-		type === 'deletePlace'
-			? dispatch(setVisitedPlace({ cityId, place: placeObj }))
-			: dispatch(removeVisitedPlace({ cityId, place: placeObj }));
 		try {
+			const uid = getState().user.userInfo.uid;
+			const { cityId, type, place, both, placeObj } = placeData;
+			if (both) {
+				dispatch(removePlace({ cityId, placeId: place.id }));
+			} else {
+				type === 'deletePlace'
+					? dispatch(setVisitedPlace({ cityId, place: placeObj }))
+					: dispatch(removeVisitedPlace({ cityId, place: placeObj }));
+			}
 			const response = await axios.delete(
 				`https://travel-app-server-njn4.onrender.com/users/${uid}/${cityId}/${type}`,
 				{ data: place }
 			);
-
+			console.log(response);
 			if (!response.status === 200) {
 				throw new Error('Server Error!');
-			}
-
-			if (both) {
-				dispatch(removePlace({ cityId, placeId: place.id }));
-				return;
 			}
 		} catch (error) {
 			return rejectWithValue(error.message);
@@ -238,6 +237,7 @@ const userSlice = createSlice({
 			state.serverError = false;
 		},
 		[deletePlace.rejected]: state => {
+			console.log('э');
 			state.serverError = true;
 		},
 		[postReorderedList.rejected]: state => {

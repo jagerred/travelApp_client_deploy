@@ -90,7 +90,11 @@ const Header = () => {
 								tabIndex={0}
 							>
 								{photo !== '' ? (
-									<img src={`/${photo}`} alt='' className='image' />
+									<img
+										src={`https://travel-app-server-njn4.onrender.com/${photo}`}
+										alt=''
+										className='image'
+									/>
 								) : null}
 								<FaUserCircle className='header__profile-icon' />
 							</div>

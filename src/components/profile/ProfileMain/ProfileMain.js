@@ -30,7 +30,11 @@ const ProfileMain = () => {
 		<div className='profile-page__main profile-main__container'>
 			<div className='profile-main__photo'>
 				{photo !== '' ? (
-					<img src={`/${photo}`} alt='' className='image' />
+					<img
+						src={`https://travel-app-server-njn4.onrender.com/${photo}`}
+						alt=''
+						className='image'
+					/>
 				) : null}
 				<FaUserCircle className='profile-main__profile-icon' />
 
