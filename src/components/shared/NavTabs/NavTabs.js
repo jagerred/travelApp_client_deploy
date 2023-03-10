@@ -20,7 +20,7 @@ const NavTabs = ({ tabs }) => {
 						{i.name}
 						<span
 							className={`nav-tabs__underline ${
-								activeTab === i.path ? `nav-tabs__underline--active` : ''
+								activeTab === i.path ? 'nav-tabs__underline--active' : ''
 							}`}
 						></span>
 					</Link>

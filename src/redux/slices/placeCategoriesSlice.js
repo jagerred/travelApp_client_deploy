@@ -4,8 +4,6 @@ import axios from 'axios';
 const initialState = {
 	categories: [],
 	loadStatus: 'loading',
-
-	//activeCategory: {},
 };
 export const fetchPlaceCategories = createAsyncThunk(
 	'placeCategories/fetchPlaceCategories',

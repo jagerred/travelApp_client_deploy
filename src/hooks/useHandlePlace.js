@@ -13,7 +13,7 @@ const useHandlePlace = ({ cities, cityId, placeObj, currentCity, likes }) => {
 				putLike({
 					cityId,
 					placeId,
-					likeCount: { likes: +likes + 1 },
+					likeCount: { likes: Number(likes) + 1 },
 				})
 			);
 		} else {
@@ -22,13 +22,12 @@ const useHandlePlace = ({ cities, cityId, placeObj, currentCity, likes }) => {
 				putLike({
 					cityId,
 					placeId,
-					likeCount: { likes: +likes + 1 },
+					likeCount: { likes: Number(likes) + 1 },
 				})
 			);
 		}
 	};
 	const erasePlace = () => {
-		console.log(currentCity);
 		const deleteType = isItemInArr(currentCity.places, placeId)
 			? 'deletePlace'
 			: 'deleteVisitedPlace';
@@ -44,7 +43,9 @@ const useHandlePlace = ({ cities, cityId, placeObj, currentCity, likes }) => {
 			})
 		);
 
-		dispatch(putLike({ cityId, placeId, likeCount: { likes: +likes - 1 } }));
+		dispatch(
+			putLike({ cityId, placeId, likeCount: { likes: Number(likes) - 1 } })
+		);
 	};
 	return { handlePlace, erasePlace };
 };

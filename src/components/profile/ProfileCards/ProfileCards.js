@@ -12,11 +12,10 @@ const ProfileCards = () => {
 	const cities = useSelector(selectUserCities);
 	const currentCity = cities.find(i => i.id === cityId);
 
-	const renderPlaces = (subArray, visited) => {
-		return currentCity[subArray].map(item => {
-			return <ProfileCard key={item.id} item={item} visited={visited} />;
-		});
-	};
+	const renderPlaces = (subArray, visited) =>
+		currentCity[subArray].map(item => (
+			<ProfileCard key={item.id} item={item} visited={visited} />
+		));
 
 	const myPlaces = renderPlaces('places', false);
 	const visitedPlaces = renderPlaces('visited', true);
@@ -33,8 +32,8 @@ const ProfileCards = () => {
 	if (myPlaces.length === 0 && visitedPlaces.length === 0)
 		return (
 			<RedirectLink
-				title={'добавленных мест'}
-				buttonText={'Найти места'}
+				title='добавленных мест'
+				buttonText='Найти места'
 				link={`/${cityId}/places`}
 			/>
 		);

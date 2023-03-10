@@ -21,17 +21,16 @@ import PlaceCategoriesSkeleton from './PlaceCategoriesSkeleton';
 import { chooseCategoryIcon } from 'utils/chooseCategoryIcon';
 
 const PlaceCategories = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const dispatch = useDispatch();
+	const [searchParams] = useSearchParams();
 	const { categories, loadStatus } = useSelector(selectPlaceCategoties);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(fetchPlaceCategories());
 	}, []);
 
 	useEffect(() => {
-		if (loadStatus !== 'idle') return;
-		if (searchParams.has('category')) {
+		if (loadStatus === 'idle' && searchParams.has('category')) {
 			const categoriesArr = searchParams.getAll('category');
 			categoriesArr.forEach(item => {
 				dispatch(toggleCategory(item));

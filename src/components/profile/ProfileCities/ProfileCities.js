@@ -8,35 +8,30 @@ const ProfileCities = () => {
 	const cities = useSelector(selectUserCities);
 	const darkTheme = useSelector(selectDarkTheme);
 
-	const renderCities = () => {
-		return cities.map(({ id, places, visited, ...props }) => {
-			return (
-				<ProfileCity
-					key={id}
-					id={id}
-					placesLength={{ places: places.length, visited: visited.length }}
-					{...props}
-					darkTheme={darkTheme}
-				/>
-			);
-		});
-	};
+	const renderCities = () =>
+		cities.map(({ id, places, visited, ...props }) => (
+			<ProfileCity
+				key={id}
+				id={id}
+				placesLength={{ places: places.length, visited: visited.length }}
+				{...props}
+				darkTheme={darkTheme}
+			/>
+		));
 
 	if (cities.length === 0)
 		return (
 			<RedirectLink
-				title={'добавленных городов'}
-				buttonText={'Найти города'}
+				title='добавленных городов'
+				buttonText='Найти города'
 				link={'/'}
 			/>
 		);
 
 	return (
-		<>
-			<div className='profile-cities__container'>
-				<ul className='list profile-cities__list'>{renderCities()}</ul>
-			</div>
-		</>
+		<div className='profile-cities__container'>
+			<ul className='list profile-cities__list'>{renderCities()}</ul>
+		</div>
 	);
 };
 export default ProfileCities;

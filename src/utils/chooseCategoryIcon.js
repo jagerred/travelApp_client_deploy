@@ -1,5 +1,6 @@
 import { MdFastfood, MdTheaterComedy, MdPark } from 'react-icons/md';
 import { GiSaintBasilCathedral, GiMedievalGate } from 'react-icons/gi';
+
 export const chooseCategoryIcon = category => {
 	switch (category) {
 		case 'f00':
@@ -13,6 +14,5 @@ export const chooseCategoryIcon = category => {
 		case 'a00':
 			return <GiMedievalGate className='place-categories__icon' />;
 		default:
-			return;
 	}
 };

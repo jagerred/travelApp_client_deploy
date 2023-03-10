@@ -107,7 +107,7 @@ const Header = () => {
 							>
 								<Link
 									to='profile/cities'
-									className={`link button header__button`}
+									className='link button header__button'
 									onClick={() => {
 										closeMenu();
 									}}

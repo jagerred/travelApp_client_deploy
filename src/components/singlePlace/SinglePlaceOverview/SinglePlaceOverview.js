@@ -13,8 +13,8 @@ import { selectUserCities } from 'redux/selectors/userSelectors';
 import { useAuth } from 'hooks/use-auth';
 import useHandlePlace from 'hooks/useHandlePlace';
 
-import { checkCurrentCity } from 'utils/placeUtils';
-import { isItemInArr } from 'utils/placeUtils';
+import { checkCurrentCity, isItemInArr } from 'utils/placeUtils';
+
 import { checkSubcategoryIcon } from 'utils/checkSubcategoryIcon';
 
 import { HiShare } from 'react-icons/hi';
@@ -38,7 +38,6 @@ const SinglePlaceOverview = () => {
 		district,
 		category,
 		likes,
-		reviews,
 		subcategory,
 	} = useSelector(selectPlaceData);
 	const darkTheme = useSelector(selectDarkTheme);
@@ -90,100 +89,98 @@ const SinglePlaceOverview = () => {
 	const themeDark = darkTheme ? 'single-place-overview__container--dark' : '';
 	const isLoading = loadStatus === 'loading';
 	return (
-		<>
-			<div className={`single-place-overview__container ${themeDark} `}>
-				<div className='single-place-overview__img'>
-					{subcategoryIcon}
-					{loadStatus === 'loading' ? (
-						<Skeleton variant='rounded' width={800} height={700} />
-					) : (
-						<img src={photos} alt={`Фото места: ${name}`} className='image' />
-					)}
-				</div>
-				<div className='single-place-overview__info'>
-					<div className='single-place-overview__title-container'>
-						<h2 className='single-place-overview__name'>
-							{isLoading ? <Skeleton /> : name}
-						</h2>
-						<span className='single-place-overview__address'>
-							{isLoading ? (
-								<Skeleton height={20} width={150} />
-							) : (
-								`${address}, р-н ${district}`
-							)}
-						</span>
-					</div>
-					<span className='single-place-overview__description'>
-						{isLoading
-							? [
-									<Skeleton key={v4()} />,
-									<Skeleton key={v4()} />,
-									<Skeleton key={v4()} />,
-									<Skeleton key={v4()} />,
-									<Skeleton key={v4()} />,
-									<Skeleton key={v4()} />,
-							  ]
-							: `${description.slice(0, 264)}${
-									descriptionHidden && description.length >= 264
-										? '...'
-										: `${description.slice(264)}`
-							  } `}
-						{description.length >= 264 ? (
-							<span
-								className='single-place-overview__more'
-								onClick={() => setDescriptionHidden(!descriptionHidden)}
-							>
-								{descriptionHidden ? 'Показать еще' : 'Скрыть'}
-							</span>
-						) : null}
-					</span>
-					<div className='single-place-overview__buttons'>
-						{isLiked ? (
-							<button
-								className='button single-place-overview__button single-place-overview__button--delete'
-								onClick={() => checkAuth(erasePlace)}
-							>
-								Удалить
-							</button>
+		<div className={`single-place-overview__container ${themeDark} `}>
+			<div className='single-place-overview__img'>
+				{subcategoryIcon}
+				{loadStatus === 'loading' ? (
+					<Skeleton variant='rounded' width={800} height={700} />
+				) : (
+					<img src={photos} alt={`Фото места: ${name}`} className='image' />
+				)}
+			</div>
+			<div className='single-place-overview__info'>
+				<div className='single-place-overview__title-container'>
+					<h2 className='single-place-overview__name'>
+						{isLoading ? <Skeleton /> : name}
+					</h2>
+					<span className='single-place-overview__address'>
+						{isLoading ? (
+							<Skeleton height={20} width={150} />
 						) : (
-							<button
-								className='button single-place-overview__button single-place-overview__button--add'
-								onClick={() => checkAuth(handlePlace)}
-							>
-								Добавить
-							</button>
+							`${address}, р-н ${district}`
 						)}
-						<CopyToClipboard
-							text={currentUrl}
-							onCopy={() => {
-								setCopyStatus(!copyStatus);
-							}}
+					</span>
+				</div>
+				<span className='single-place-overview__description'>
+					{isLoading
+						? [
+								<Skeleton key={v4()} />,
+								<Skeleton key={v4()} />,
+								<Skeleton key={v4()} />,
+								<Skeleton key={v4()} />,
+								<Skeleton key={v4()} />,
+								<Skeleton key={v4()} />,
+						  ]
+						: `${description.slice(0, 264)}${
+								descriptionHidden && description.length >= 264
+									? '...'
+									: `${description.slice(264)}`
+						  } `}
+					{description.length >= 264 ? (
+						<span
+							className='single-place-overview__more'
+							onClick={() => setDescriptionHidden(!descriptionHidden)}
 						>
-							<button className='button single-place-overview__button single-place-overview__button--share'>
-								{copyStatus ? (
-									<MdDone className='single-place-overview__share-icon' />
-								) : (
-									<HiShare className='single-place-overview__share-icon' />
-								)}
-							</button>
-						</CopyToClipboard>
-						<AnimatePresence>
+							{descriptionHidden ? 'Показать еще' : 'Скрыть'}
+						</span>
+					) : null}
+				</span>
+				<div className='single-place-overview__buttons'>
+					{isLiked ? (
+						<button
+							className='button single-place-overview__button single-place-overview__button--delete'
+							onClick={() => checkAuth(erasePlace)}
+						>
+							Удалить
+						</button>
+					) : (
+						<button
+							className='button single-place-overview__button single-place-overview__button--add'
+							onClick={() => checkAuth(handlePlace)}
+						>
+							Добавить
+						</button>
+					)}
+					<CopyToClipboard
+						text={currentUrl}
+						onCopy={() => {
+							setCopyStatus(!copyStatus);
+						}}
+					>
+						<button className='button single-place-overview__button single-place-overview__button--share'>
 							{copyStatus ? (
-								<motion.div
-									initial={{ opacity: 0 }}
-									animate={{ opacity: 1 }}
-									exit={{ opacity: 0 }}
-								>
-									<span className='single-place-overview__copy-feedback'>
-										Скопировано
-									</span>
-								</motion.div>
-							) : null}
-						</AnimatePresence>
-					</div>
+								<MdDone className='single-place-overview__share-icon' />
+							) : (
+								<HiShare className='single-place-overview__share-icon' />
+							)}
+						</button>
+					</CopyToClipboard>
+					<AnimatePresence>
+						{copyStatus ? (
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+							>
+								<span className='single-place-overview__copy-feedback'>
+									Скопировано
+								</span>
+							</motion.div>
+						) : null}
+					</AnimatePresence>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 export default SinglePlaceOverview;

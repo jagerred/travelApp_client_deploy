@@ -42,22 +42,19 @@ const Search = ({ isMain, searchPlaceholder }) => {
 			: dispatch(searchRequest(`${cityId}/place/${debouncedValue}`));
 	}, [debouncedValue]);
 	useOnClickOutside(resultsRef, () => setOpened(false), !opened, inputRef);
-	const renderSearchResult = () => {
-		return debouncedValue === ''
+	const renderSearchResult = () =>
+		debouncedValue === ''
 			? null
-			: searchResult.map(i => {
-					return (
-						<li key={v4()} className='search__result-item'>
-							<Link
-								to={isMain ? `/${i._id}/places` : `${i.id}/info`}
-								className='link search__link'
-								onClick={() => setValue('')}
-							></Link>
-							{i.name}
-						</li>
-					);
-			  });
-	};
+			: searchResult.map(i => (
+					<li key={v4()} className='search__result-item'>
+						<Link
+							to={isMain ? `/${i._id}/places` : `${i.id}/info`}
+							className='link search__link'
+							onClick={() => setValue('')}
+						></Link>
+						{i.name}
+					</li>
+			  ));
 
 	const addSearchFilter = e => {
 		e.preventDefault();

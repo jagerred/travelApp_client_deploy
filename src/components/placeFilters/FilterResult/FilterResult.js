@@ -22,11 +22,11 @@ import {
 import PlaceCard from 'components/placeFilters/PlaceCard/PlaceCard';
 import PlaceCardSkeleton from 'components/placeFilters/PlaceCard/PlaceCardSkeleton';
 import PaginationNav from '../PaginationNav/PaginationNav';
+import FiltersSelect from '../FiltersSelect/FiltersSelect';
 
 import setUrlRequest from 'utils/setUrlRequest';
 import declarationOfNumber from 'utils/declarationOfNumber';
 import { BsSliders } from 'react-icons/bs';
-import FiltersSelect from '../FiltersSelect/FiltersSelect';
 
 const FilterResult = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -66,7 +66,7 @@ const FilterResult = () => {
 				sort: [sortBy, orderBy],
 				highRating,
 				localsChoice,
-				currentPage: +page,
+				currentPage: Number(page),
 			})
 		);
 	}, []);
@@ -96,11 +96,11 @@ const FilterResult = () => {
 			: 'asc';
 	};
 
-	const renderPlace = arr => {
-		return arr.map(({ id, ...props }) => {
-			return <PlaceCard key={id} cityId={cityId} placeId={id} {...props} />;
-		});
-	};
+	const renderPlace = arr =>
+		arr.map(({ id, ...props }) => (
+			<PlaceCard key={id} cityId={cityId} placeId={id} {...props} />
+		));
+
 	const changeSort = e =>
 		dispatch(updateSort([e.target.value, definePlacesOrder(e)]));
 

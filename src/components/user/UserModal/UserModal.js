@@ -67,7 +67,7 @@ const UserModal = () => {
 		>
 			{isModalLogin ? (
 				<UserForm
-					title={'Войти в аккаунт'}
+					title='Войти в аккаунт'
 					handleClick={handleLogin}
 					buttonName={
 						isLoading ? <CircularProgress color='inherit' size={18} /> : 'Войти'
@@ -76,7 +76,7 @@ const UserModal = () => {
 				/>
 			) : (
 				<UserForm
-					title={'Создать аккаунт'}
+					title='Создать аккаунт'
 					handleClick={handleSignUp}
 					buttonName={
 						isLoading ? (

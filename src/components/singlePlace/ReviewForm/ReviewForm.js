@@ -27,7 +27,7 @@ const ReviewForm = ({ toggleMyReview }) => {
 
 	const averageRating = reviewRating => {
 		const ratingBefore =
-			reviews.reduce((sum, i) => sum + +i.rating, reviewRating) /
+			reviews.reduce((sum, i) => sum + Number(i.rating), reviewRating) /
 			(reviews.length + 1);
 		return ratingBefore % 1 === 0
 			? ratingBefore.toFixed(0)
@@ -35,7 +35,7 @@ const ReviewForm = ({ toggleMyReview }) => {
 	};
 
 	const onSubmit = data => {
-		const rating = averageRating(+data.rating);
+		const rating = averageRating(Number(data.rating));
 		dispatch(
 			postReview({ cityId, placeId, review: { uid, name, photo, ...data } })
 		);
@@ -51,56 +51,54 @@ const ReviewForm = ({ toggleMyReview }) => {
 	};
 
 	return (
-		<>
-			<form
-				className={`review-form__container ${
-					darkTheme ? 'review-form__container--dark' : ''
-				}`}
-				onSubmit={handleSubmit(onSubmit)}
-			>
-				<div className='review-form__user'>
-					<div className='review-form__photo'>
-						<img src={`/${photo}`} alt='' className='image' />
-					</div>
-					<div className='review-form__info'>
-						<span className='review-form__name'>{name}</span>
-						<Controller
-							name='rating'
-							control={control}
-							defaultValue={3}
-							rules={{ required: true }}
-							render={({ field: { onChange } }) => (
-								<Rating
-									sx={{ color: '#3359e6' }}
-									name='rating'
-									onChange={onChange}
-									emptyIcon={null}
-								/>
-							)}
-						/>
-
-						{errors?.rating && (
-							<span className='review-form__error'>
-								{errors?.rating?.message || 'Напишите отзыв'}
-							</span>
-						)}
-					</div>
+		<form
+			className={`review-form__container ${
+				darkTheme ? 'review-form__container--dark' : ''
+			}`}
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			<div className='review-form__user'>
+				<div className='review-form__photo'>
+					<img src={`/${photo}`} alt='' className='image' />
 				</div>
-				<textarea
-					placeholder='Ваш отзыв'
-					className='review-form__review'
-					{...register('text', { required: 'Напишите отзыв' })}
-				></textarea>
-				{errors?.text && (
-					<span className='review-form__error'>
-						{errors?.text?.message || 'Напишите отзыв'}
-					</span>
-				)}
-				<button className='button review-form__button' disabled={!isValid}>
-					Отправить
-				</button>
-			</form>
-		</>
+				<div className='review-form__info'>
+					<span className='review-form__name'>{name}</span>
+					<Controller
+						name='rating'
+						control={control}
+						defaultValue={3}
+						rules={{ required: true }}
+						render={({ field: { onChange } }) => (
+							<Rating
+								sx={{ color: '#3359e6' }}
+								name='rating'
+								onChange={onChange}
+								emptyIcon={null}
+							/>
+						)}
+					/>
+
+					{errors?.rating && (
+						<span className='review-form__error'>
+							{errors?.rating?.message || 'Напишите отзыв'}
+						</span>
+					)}
+				</div>
+			</div>
+			<textarea
+				placeholder='Ваш отзыв'
+				className='review-form__review'
+				{...register('text', { required: 'Напишите отзыв' })}
+			></textarea>
+			{errors?.text && (
+				<span className='review-form__error'>
+					{errors?.text?.message || 'Напишите отзыв'}
+				</span>
+			)}
+			<button className='button review-form__button' disabled={!isValid}>
+				Отправить
+			</button>
+		</form>
 	);
 };
 export default ReviewForm;

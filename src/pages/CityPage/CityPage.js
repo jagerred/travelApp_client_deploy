@@ -6,7 +6,7 @@ import Filters from 'components/placeFilters/Filters/Filters';
 const CityPage = () => {
 	return (
 		<>
-			<Search isMain={false} searchPlaceholder={'Введите место'} />
+			<Search searchPlaceholder='Введите место' />
 			<PlaceCategories />
 			<div className='places-filter'>
 				<Filters />

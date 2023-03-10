@@ -38,13 +38,14 @@ export const putLike = createAsyncThunk(
 );
 export const putRating = createAsyncThunk(
 	'filterResult/putReview',
-	async (ratingData, { rejectWithValue, dispatch }) => {
+	async (ratingData, { rejectWithValue }) => {
 		try {
 			const { cityId, placeId, ratingCount } = ratingData;
 			const response = await axios.put(
 				`https://travel-app-server-njn4.onrender.com/${cityId}/${placeId}/rating`,
 				ratingCount
 			);
+			return response;
 		} catch (error) {
 			return rejectWithValue(error.message);
 		}

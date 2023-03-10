@@ -35,6 +35,7 @@ export const postReview = createAsyncThunk('place/postReview', async data => {
 		`https://travel-app-server-njn4.onrender.com/${data.cityId}/${data.placeId}/reviews`,
 		data.review
 	);
+	return response;
 });
 const placeSlice = createSlice({
 	name: 'place',

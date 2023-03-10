@@ -27,8 +27,7 @@ const SubcategoryFilter = () => {
 	const darkTheme = useSelector(selectDarkTheme);
 
 	useEffect(() => {
-		if (subcategories.lenght === 0) return;
-		dispatch(clearSubcategories());
+		if (subcategories.length !== 0) dispatch(clearSubcategories());
 	}, []);
 
 	useEffect(() => {
@@ -55,23 +54,20 @@ const SubcategoryFilter = () => {
 	);
 
 	const dispatch = useDispatch();
-	const renderSubcategoryList = () => {
-		return subcategories.map(i => {
-			return (
-				<li className='filters__subcategories-item' key={v4()}>
-					<span className='filters__title'>Тип {i.title}</span>
-					<div className='filters__categories'>
-						<ul className='list filters__list filters__list--buttons'>
-							{renderSubcategoryItem(i, i.category)}
-						</ul>
-					</div>
-				</li>
-			);
-		});
-	};
+	const renderSubcategoryList = () =>
+		subcategories.map(i => (
+			<li className='filters__subcategories-item' key={v4()}>
+				<span className='filters__title'>Тип {i.title}</span>
+				<div className='filters__categories'>
+					<ul className='list filters__list filters__list--buttons'>
+						{renderSubcategoryItem(i, i.category)}
+					</ul>
+				</div>
+			</li>
+		));
 
-	const renderSubcategoryItem = (item, category) => {
-		return item['filters'].map(({ name, subcategory, isActive }) => {
+	const renderSubcategoryItem = (item, category) =>
+		item['filters'].map(({ name, subcategory, isActive }) => {
 			const activeClass = isActive ? ` filters__button--active` : null;
 			return (
 				<li className='filters__item filters__item--buttons' key={v4()}>
@@ -99,7 +95,6 @@ const SubcategoryFilter = () => {
 				</li>
 			);
 		});
-	};
 
 	const themeClass = darkTheme ? `dark-card` : '';
 

@@ -130,6 +130,5 @@ export const checkSubcategoryIcon = subcategory => {
 				/>
 			);
 		default:
-			return;
 	}
 };

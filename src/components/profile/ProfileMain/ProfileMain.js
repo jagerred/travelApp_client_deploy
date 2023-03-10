@@ -6,7 +6,7 @@ import { selectUserInfo } from 'redux/selectors/userSelectors';
 import declarationOfNumber from 'utils/declarationOfNumber';
 import { FaUserCircle } from 'react-icons/fa';
 
-const ProfileMain = () => {
+function ProfileMain() {
 	const dispatch = useDispatch();
 	const { uid, name, photo, cities } = useSelector(selectUserInfo);
 	const fileInputRef = useRef(null);
@@ -77,6 +77,6 @@ const ProfileMain = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default ProfileMain;
