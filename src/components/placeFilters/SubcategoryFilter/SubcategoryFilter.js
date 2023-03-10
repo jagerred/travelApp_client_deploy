@@ -16,7 +16,7 @@ import {
 import { selectDarkTheme } from 'redux/selectors/globalSelectors';
 
 import { v4 } from 'uuid';
-import { Switch } from '@mui/material';
+import { CircularProgress, Switch } from '@mui/material';
 
 const SubcategoryFilter = () => {
 	const [isExternalUrl, setIsExternalUrl] = useState(true);
@@ -103,6 +103,9 @@ const SubcategoryFilter = () => {
 			<ul className='list filters__subcategories-list'>
 				{renderSubcategoryList()}
 			</ul>
+			{subcategoriesLoadStatus === 'loading' && (
+				<CircularProgress className='loader' color='inherit' size={18} />
+			)}
 			<ul className='list filters__additional-filters'>
 				<li className='filters__additional-filter'>
 					<Switch
