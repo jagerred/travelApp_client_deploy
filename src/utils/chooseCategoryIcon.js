@@ -1,5 +1,6 @@
 import { MdFastfood, MdTheaterComedy, MdPark } from 'react-icons/md';
-import { GiSaintBasilCathedral, GiMedievalGate } from 'react-icons/gi';
+import { GiMedievalGate } from 'react-icons/gi';
+import { IoCamera } from 'react-icons/io5';
 
 export const chooseCategoryIcon = category => {
 	switch (category) {
@@ -10,7 +11,7 @@ export const chooseCategoryIcon = category => {
 		case 'p00':
 			return <MdPark className='place-categories__icon' />;
 		case 'd00':
-			return <GiSaintBasilCathedral className='place-categories__icon' />;
+			return <IoCamera className='place-categories__icon' />;
 		case 'a00':
 			return <GiMedievalGate className='place-categories__icon' />;
 		default:
