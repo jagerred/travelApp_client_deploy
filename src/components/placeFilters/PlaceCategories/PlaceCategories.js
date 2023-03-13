@@ -82,13 +82,11 @@ const PlaceCategories = () => {
 	const slides = categoriesRender(categories);
 
 	return (
-		<>
-			<div className='place-categories__container'>
-				<ul className='list place-categories__list'>
-					{loadStatus === 'loading' ? <PlaceCategoriesSkeleton /> : slides}
-				</ul>
-			</div>
-		</>
+		<div className='place-categories__container'>
+			<ul className='list place-categories__list'>
+				{loadStatus === 'loading' ? <PlaceCategoriesSkeleton /> : slides}
+			</ul>
+		</div>
 	);
 };
 export default PlaceCategories;
